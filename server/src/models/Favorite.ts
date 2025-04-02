@@ -16,7 +16,7 @@ export class Favorite extends Model<
 > {
     declare id: CreationOptional<number>;
     declare userID: ForeignKey<User['id']>;
-    declare movieId: ForeignKey<Movie['id'];
+    declare movieId: ForeignKey<Movie['id']>;
 }
 
 export function FavoriteFactory(sequelize: Sequelize) {
