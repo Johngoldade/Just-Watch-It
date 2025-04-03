@@ -9,6 +9,7 @@ import {
 } from 'sequelize';
 
 import { User } from './User.js'
+import { Movie } from './Movie.js'
 
 export class Rating extends Model<
     InferAttributes<Rating>,
@@ -17,7 +18,7 @@ export class Rating extends Model<
     declare id: CreationOptional<number>;
     declare rating: number;
     declare user: ForeignKey<User['id']>;
-    declare Movie: ForeignKey<Movie['id']>
+    declare Movie: ForeignKey<Movie['imdbID']>;
 }
 
 export function RatingFactory(sequelize: Sequelize) {
