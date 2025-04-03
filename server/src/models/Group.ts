@@ -17,7 +17,7 @@ export class Group extends Model<
     InferCreationAttributes<Group>
 > {
     declare id: CreationOptional<number>;
-    declare user: ForeignKey<User['id']>;
+    declare userId: ForeignKey<User['id']>;// Note: 'user' was changed to 'userId' for consistency
     declare watchList: ForeignKey<WatchList['id']>;
 }
 
@@ -38,4 +38,6 @@ export function GroupFactory(sequelize: Sequelize) {
             modelName: 'group'
         }
     )
+
+    return Group;
 }

@@ -22,7 +22,7 @@ export class User extends Model<
     declare favorites: ForeignKey<Favorite['id']>
 }
 
-export function UserFactory(sequelize: Sequelize) {
+export function UserFactory(sequelize: Sequelize){
     User.init(
         {
             id: {
@@ -56,5 +56,8 @@ export function UserFactory(sequelize: Sequelize) {
             underscored: true,
             modelName: 'users'
         }
+
     )
+
+    return User;
 }
