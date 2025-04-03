@@ -9,14 +9,15 @@ import {
 } from 'sequelize';
 
 import { User } from './User.js'
+import { Movie } from './Movie.js';
 
 export class Favorite extends Model<
     InferAttributes<Favorite>,
     InferCreationAttributes<Favorite>
 > {
     declare id: CreationOptional<number>;
-    declare userID: ForeignKey<User['id']>;
-    declare movieId: ForeignKey<Movie['id']>;
+    declare userId: ForeignKey<User['id']>;// Note: 'userID' was changed to 'userId' for consistency
+    declare movieId: ForeignKey<Movie['imdbID']>;
 }
 
 export function FavoriteFactory(sequelize: Sequelize) {
@@ -36,4 +37,6 @@ export function FavoriteFactory(sequelize: Sequelize) {
             modelName: 'favorites'
         }
     )
+
+    return Favorite;
 }
