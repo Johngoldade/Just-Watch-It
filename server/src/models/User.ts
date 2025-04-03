@@ -16,6 +16,8 @@ export class User extends Model<
 > {
     declare id: CreationOptional<number>;
     declare name: string;
+    declare email: string;
+    declare username: string;
     declare password: string;
     declare favorites: ForeignKey<Favorite['id']>
 }
@@ -32,6 +34,16 @@ export function UserFactory(sequelize: Sequelize) {
             name: {
                 type: DataTypes.STRING,
                 allowNull: false,
+            },
+            email: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                unique: true,
+            },
+            username: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                unique: true
             },
             password: {
                 type: DataTypes.STRING,
