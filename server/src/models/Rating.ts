@@ -17,7 +17,7 @@ export class Rating extends Model<
 > {
     declare id: CreationOptional<number>;
     declare rating: number;
-    declare userId: ForeignKey<User['id']>;
+    declare userId: ForeignKey<User['id']>;// Note: 'user' was changed to 'userId' for clarity
     declare Movie: ForeignKey<Movie['imdbID']>
 }
 
