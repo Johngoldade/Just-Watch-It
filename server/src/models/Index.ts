@@ -21,7 +21,7 @@ User.hasMany(Rating, {
     onDelete: 'CASCADE',
 })
 User.belongsToMany(Group, {
-    through: 'NAME_OF_JUNCTION_TABLE', // Replace with actual junction table name
+    through: 'UserGroup',
     foreignKey: 'userId',
     otherKey: 'groupId',
     as: 'groups',
@@ -29,12 +29,16 @@ User.belongsToMany(Group, {
 })
 
 Group.belongsToMany(User, {
-    through: 'NAME_OF_JUNCTION_TABLE', // Replace with actual junction table name
+    through: 'UserGroup',
     foreignKey: 'groupId',
     otherKey: 'userId',
     as: 'users',
     onDelete: 'CASCADE',
 })
+
+Group.belongsToMany(User, { through: "GroupUsers", as: "users" })
+User.belongsToMany(Group, { through: "GroupUsers", as: "groups" })
+
 Group.hasMany(WatchList, {
     foreignKey: 'groupId',
     as: 'watchLists',
