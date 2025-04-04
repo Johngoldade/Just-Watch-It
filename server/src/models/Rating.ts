@@ -17,8 +17,8 @@ export class Rating extends Model<
 > {
     declare id: CreationOptional<number>;
     declare rating: number;
-    declare userId: ForeignKey<User['id']>;// Note: 'user' was changed to 'userId' for clarity
-    declare Movie: ForeignKey<Movie['imdbID']>
+    declare userId: ForeignKey<User['id']>;
+    declare movieId: ForeignKey<Movie['imdbID']>
 }
 
 export function RatingFactory(sequelize: Sequelize) {
