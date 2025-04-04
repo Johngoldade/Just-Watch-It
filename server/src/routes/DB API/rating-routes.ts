@@ -110,4 +110,4 @@ router.delete("/:userId/ratings/:ratingId", async (req: Request, res: Response) 
     }
 })
 
-export default router
+export { router as ratingRouter }
