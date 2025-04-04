@@ -17,8 +17,24 @@ export class Group extends Model<
     InferCreationAttributes<Group>
 > {
     declare id: CreationOptional<number>;
-    declare user: ForeignKey<User['id']>;
+    declare userId: ForeignKey<User['id']>;// Note: 'user' was changed to 'userId' for consistency
     declare watchList: ForeignKey<WatchList['id']>;
+
+    static associate(models: any) {
+        // Define association with User
+        Group.belongsTo(models.User, {
+            foreignKey: 'userId',
+            as: 'user', // Alias for the association
+            onDelete: 'CASCADE', // Optional: define behavior on user deletion
+        });
+
+        // Define association with WatchList
+        Group.belongsTo(models.WatchList, {
+            foreignKey: 'watchList',
+            as: 'watchList', // Alias for the association
+            onDelete: 'CASCADE', // Optional: define behavior on watchlist deletion
+        });
+    }
 }
 
 export function GroupFactory(sequelize: Sequelize) {
@@ -38,4 +54,6 @@ export function GroupFactory(sequelize: Sequelize) {
             modelName: 'group'
         }
     )
+
+    return Group;
 }
