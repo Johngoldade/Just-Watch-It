@@ -16,7 +16,7 @@ router.get("/:userId/groups", async (req: Request, res: Response) => {
             include: [{
                 model: WatchList,
                 as: 'watchList',
-                attributes: ['id', 'name'] // Include watchlist details if needed
+                attributes: ['id', 'name']
             }]
         })
 
@@ -41,7 +41,6 @@ router.post("/:userId/groups", async (req: Request, res: Response) => {
     }
 
     try {
-        // Check if the watchlist exists
         const watchList = await WatchList.findByPk(watchListId)
         if (!watchList) {
             return res.status(404).json({ message: "WatchList not found." })
@@ -136,4 +135,4 @@ router.delete("/:groupId", async (req: Request, res: Response) => {
 })
 
 
-export default router
+export { router as groupRouter }

@@ -146,4 +146,4 @@ router.delete("/:groupId/watchlists/:watchlistId", async (req: Request, res: Res
     }
 })
 
-export default router
+export { router as watchlistRouter }
