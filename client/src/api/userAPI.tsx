@@ -22,4 +22,8 @@ const retrieveUsers = async () => {
     }
 }
 
-export { retrieveUsers }
+const getGroupPriority= async () => {
+
+}
+
+export { retrieveUsers, getGroupPriority }
