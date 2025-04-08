@@ -8,7 +8,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.tsx'
 import HomePage from './pages/Home.tsx'
 import MovieDB from './pages/MovieDB.tsx'
-import Groups from './pages/Groups.tsx'
+// import Groups from './pages/Groups.tsx'
 import MyMovies from './pages/MyMovies.tsx'
 import ErrorPage from './pages/Error.tsx'
 
@@ -27,10 +27,10 @@ const router = createBrowserRouter([
         path: '/Movies',
         element: <MovieDB /> 
       },
-      {
-        path: '/Groups',
-        element: <Groups />
-      },
+      // {
+      //   path: '/Groups',
+      //   element: <Groups />
+      // },
       {
         path: '/Mymovies',
         element: <MyMovies />

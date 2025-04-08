@@ -1,3 +1,3 @@
-DROP DATABASE IF EXISTS just_watch_it
+DROP DATABASE IF EXISTS just_watch_it;
 
-CREATE DATABASE IF EXISTS just_watch_it
+CREATE DATABASE just_watch_it;
