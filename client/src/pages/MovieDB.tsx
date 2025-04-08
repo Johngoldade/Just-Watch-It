@@ -29,7 +29,7 @@ export default function MovieDBBody() {
             <div> 
                 { movies.map((movie: Movie) => (
                     <div className="card" style={{ width: '20rem' }} key={movie.id}>
-                    <img src={`https://image.tmdb.org/t/p/w100/${movie.poster_path}`} className="card-img-top" alt={`Poster for ${movie.title}`}/>
+                    <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} className="card-img-top" alt={`Poster for ${movie.title}`}/>
                     <div className="card-body">
                       <h5 className="card-title">{movie.title}</h5>
                       <p className="card-text">{movie.overview}</p>
