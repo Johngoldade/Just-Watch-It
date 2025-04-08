@@ -1,6 +1,6 @@
-import type  { UserLogin } from '../interfaces/UserLogin'
+import type  { User } from '../interfaces/User'
 
-const login = async (userInfo: UserLogin) => {
+const login = async (userInfo: User) => {
     try {
         const response = await fetch('/auth/login', {
             method: 'POST',
