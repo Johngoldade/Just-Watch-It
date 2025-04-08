@@ -1,4 +1,4 @@
-import express from "express"
+import express, { raw } from "express"
 import { Request, Response } from "express"
 import { Favorite } from "../../models/Favorite.js"
 import { User } from "../../models/User.js"
@@ -6,12 +6,28 @@ import { User } from "../../models/User.js"
 const router = express.Router()
 
 // Get all favorites for a user
-router.get("/:userId/favorites", async (req: Request, res: Response) => {
-    const userId = req.params.userId
+router.get("/favorites", async (req: Request, res: Response) => {
+    const user: string | undefined = req.user?.username
 
     try {
+        if (!user) {
+            res.sendStatus(401)
+            return
+        }
+
+        const userInfo = await User.findOne({
+            where: {
+                username: user,
+            }
+        })
+        
+        if (!userInfo) {
+            res.json({ message: 'No user found'})
+            return
+        }
+
         const favorites = await Favorite.findAll({
-            where: { id: userId },
+            where: { userId: userInfo.id },
             include: [{
                 model: User,
                 as: 'user',
@@ -31,18 +47,35 @@ router.get("/:userId/favorites", async (req: Request, res: Response) => {
 })
 
 // Add a favorite for a user
-router.post("/:userId/favorites", async (req: Request, res: Response) => {
-    const userId = parseInt(req.params.userId)
+router.post("/favorites", async (req: Request, res: Response) => {
     const { movieId } = req.body
 
     if (!movieId) {
         return res.status(400).json({ message: "Movie ID is required." })
     }
 
+    const user: string | undefined = req.user?.username
+
     try {
+        if (!user) {
+            res.sendStatus(401)
+            return
+        }
+
+        const userInfo = await User.findOne({
+            where: {
+                username: user,
+            }
+        })
+        
+        if (!userInfo) {
+            res.json({ message: 'No user found'})
+            return
+        }
+
         const existingFavorite = await Favorite.findOne({
             where: {
-                userId: userId,
+                userId: userInfo.id,
                 movieId: movieId
             }
         })
@@ -52,7 +85,7 @@ router.post("/:userId/favorites", async (req: Request, res: Response) => {
         }
 
         const newFavorite = await Favorite.create({
-            userId: userId,
+            userId: userInfo.id,
             movieId: movieId
         })
 
@@ -64,14 +97,30 @@ router.post("/:userId/favorites", async (req: Request, res: Response) => {
 })
 
 // Remove a favorite for a user
-router.delete("/:userId/favorites/:movieId", async (req: Request, res: Response) => {
-    const userId = parseInt(req.params.userId)
+router.delete("/favorites/:movieId", async (req: Request, res: Response) => {
     const movieId = req.params.movieId
+    const user: string | undefined = req.user?.username
 
     try {
+        if (!user) {
+            res.sendStatus(401)
+            return
+        }
+
+        const userInfo = await User.findOne({
+            where: {
+                username: user,
+            }
+        })
+        
+        if (!userInfo) {
+            res.json({ message: 'No user found'})
+            return
+        }
+
         const favorite = await Favorite.findOne({
             where: {
-                userId: userId,
+                userId: userInfo.id,
                 movieId: movieId
             }
         })
@@ -90,12 +139,29 @@ router.delete("/:userId/favorites/:movieId", async (req: Request, res: Response)
 })
 
 // Clear all favorites for a user
-router.delete("/:userId/favorites", async (req: Request, res: Response) => {
-    const userId = parseInt(req.params.userId)
+router.delete("/favorites", async (req: Request, res: Response) => {
+    const user: string | undefined = req.user?.username
+
     try {
+        if (!user) {
+            res.sendStatus(401)
+            return
+        }
+
+        const userInfo = await User.findOne({
+            where: {
+                username: user,
+            }
+        })
+        
+        if (!userInfo) {
+            res.json({ message: 'No user found'})
+            return
+        }
+    
         const deletedCount = await Favorite.destroy({
             where: {
-                userId: userId
+                userId: userInfo.id
             }
         })
         if (deletedCount === 0) {
