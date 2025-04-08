@@ -20,6 +20,7 @@ export class User extends Model<
     declare username: string;
     declare password: string;
     declare favorites: ForeignKey<Favorite['id']>
+    declare primaryGroup: ForeignKey<User['id']>
 }
 
 export function UserFactory(sequelize: Sequelize){
@@ -48,6 +49,22 @@ export function UserFactory(sequelize: Sequelize){
             password: {
                 type: DataTypes.STRING,
                 allowNull: false,
+            },
+            favorites: {
+                type: DataTypes.INTEGER,
+                allowNull: true,
+                references: {
+                    model: Favorite,
+                    key: 'id'
+                }
+            },
+            primaryGroup: {
+                type: DataTypes.INTEGER,
+                allowNull: true,
+                references: {
+                    model: User,
+                    key: 'id'
+                }
             }
         },
         {
