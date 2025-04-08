@@ -9,6 +9,7 @@ import {
 } from 'sequelize';
 
 import { Favorite } from './Favorite.js'
+import { Group } from './Group.js';
 
 export class User extends Model<
     InferAttributes<User>,
@@ -20,7 +21,7 @@ export class User extends Model<
     declare username: string;
     declare password: string;
     declare favorites: ForeignKey<Favorite['id']>
-    declare primaryGroup: ForeignKey<User['id']>
+    declare primaryGroup: ForeignKey<Group['id']>
 }
 
 export function UserFactory(sequelize: Sequelize){
