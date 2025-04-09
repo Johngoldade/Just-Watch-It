@@ -7,6 +7,7 @@ export default function Home() {
       <p>Use the navigation bar to explore the app.</p>
     </div>
   );
+}
 
 // export default function HomePage() {
 

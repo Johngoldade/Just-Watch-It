@@ -7,7 +7,7 @@ const router = express.Router()
 router.get('/', async (_req: Request, res: Response) =>{
     try {
         console.log(process.env.API_TOKEN)
-        const response = await fetch ('https://api.themoviedb.org/3/trending/movie/day?language=en-US',
+        const response = await fetch ('https://api.themoviedb.org/3/discover/movie?language=en-US&sort_by=popularity.desc',
             {
                 headers: {
                     Authorization: `Bearer ${process.env.API_TOKEN}`
@@ -57,3 +57,6 @@ router.get('/:movie', async (req: Request, res: Response) =>{
 })
 
 export { router as TMDBRouter }
+
+
+// https://api.themoviedb.org/3/trending/movie/day?language=en-US

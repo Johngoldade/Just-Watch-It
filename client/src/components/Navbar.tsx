@@ -1,32 +1,37 @@
 import { Link, useLocation } from 'react-router-dom';
+import Search from './Search'
 
 const Navbar = () => {
     const location = useLocation().pathname;
     return (
-<nav className="navbar navbar-expand-lg navbar-light bg-light">
-  <a className="navbar-brand" href="#">Navbar</a>
-  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span className="navbar-toggler-icon"></span>
-  </button>
+        <nav className="header-back navbar navbar-expand-xl">
+            <button className="navbar-toggler border border-light " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <section className="top">
+                        <ul className="navbar-nav">
+                            <li className="nav-item px-2">
+                                <Link to="/" className={location === '/' ? 'title2' : 'title1'}>Home</Link>
+                            </li>
+                            <li className="nav-item px-2">
+                                <Link to="/Movies" className={location === '/Movies' ? 'title2' : 'title1'}>Movie Database</Link>
+                            </li>
+                            <li className="nav-item px-2">
+                                <Link to="/Groups" className={location === '/Groups' ? 'title2' : 'title1'}>Groups</Link>
+                            </li>
+                            <li className="nav-item px-2">
+                                <Link to="/Mymovies" className={location === '/Mymovies' ? 'title2' : 'title1'}>My Movies</Link>
+                            </li>
+                        </ul>
+                        
+                </section>
+                <div className="ps-5 pe-2">
+                    < Search />
+                </div>
+            </div>
+        </nav >
 
-  <div className="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item">
-                            <Link to="/" className={location === '/' ? 'nav-link active' : 'nav-link'}>Home</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/Movies" className={location === '/Movies' ? 'nav-link active' : 'nav-link'}>Movie Database</Link>
-                        </li>
-     
-                        <li className="nav-item">
-                            <Link to="/Groups" className={location === '/Groups' ? 'nav-link active' : 'nav-link'}>Groups</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/Mymovies" className={location === '/Mymovies' ? 'nav-link active' : 'nav-link'}>My Movies</Link>
-                        </li>
-    </ul>
-  </div>
-</nav>
     )
 }
 export default Navbar;

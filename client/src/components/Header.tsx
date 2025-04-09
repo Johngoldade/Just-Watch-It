@@ -1,14 +1,19 @@
 import Navbar from './Navbar'
 
-import Search from './Search'
+
 
 const Header = () => {
     return (
-        <header className='.d-flex fustify-content=-between'>
-            <h1>Just-Watch-It</h1>
-
-            <Search />
-            <Navbar />
+        <header>
+            <div className="header-back title"> 
+                <h1 className=" title2">Just <span className='title1'>Watch</span> It</h1>
+                <img src="clapperboard.png" className='title-img ms-3'/>
+            </div>
+            
+            <div>
+                <Navbar />
+            </div>
+            
         </header>
     )
 }
