@@ -22,8 +22,13 @@ const retrieveUsers = async () => {
     }
 }
 
-const getGroupPriority= async () => {
+const getPriorityGroup= async () => {
+    try {
 
+    } catch (err) {
+        console.log('Error from data retival:', err);
+        return[];
+    }
 }
 
-export { retrieveUsers, getGroupPriority }
+export { retrieveUsers, getPriorityGroup }
