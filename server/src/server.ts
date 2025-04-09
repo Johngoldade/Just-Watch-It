@@ -7,7 +7,8 @@ import express from 'express'
 import routes from './routes/index.js'
 import { Sequelize } from 'sequelize'
 
-const sequelize = new Sequelize({
+const sequelize = process.env.DB_URL ? new Sequelize(process.env.DB_URL) : 
+    new Sequelize({ 
     dialect: 'postgres',
     database: process.env.DB_NAME || '',
     username: process.env.DB_USER || '',

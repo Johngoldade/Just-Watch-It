@@ -7,7 +7,7 @@ const router = express.Router()
 router.get('/', async (_req: Request, res: Response) =>{
     try {
         console.log(process.env.API_TOKEN)
-        const response = await fetch ('https://api.themoviedb.org/3/discover/movie?language=en-US&sort_by=popularity.desc',
+        const response = await fetch ('https://api.themoviedb.org/3/discover/movie?language=en-US&page=126&sort_by=popularity.desc',
             {
                 headers: {
                     Authorization: `Bearer ${process.env.API_TOKEN}`
