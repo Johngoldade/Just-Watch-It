@@ -1,4 +1,4 @@
-import express, { raw } from "express"
+import express from "express"
 import { Request, Response } from "express"
 import { Favorite } from "../../models/Favorite.js"
 import { User } from "../../models/User.js"

@@ -1,6 +1,9 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
     /* Modules */
     "rootDir": "src" /* Specify the root folder within your source files. */,
 

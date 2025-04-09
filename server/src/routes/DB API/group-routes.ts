@@ -120,31 +120,6 @@ router.post("/:groupId/users", async (req: Request, res: Response) => {
             return res.status(404).json({ message: "User not found." })
         }
 
-
-
-        return res.status(200).json({ message: "User added to group successfully." })
-    } catch (error) {
-        console.error("Error adding user to group:", error)
-        return res.status(500).json({ message: "Internal server error" })
-    }
-})
-
-// Remove a user from a group
-router.delete("/:groupId/users/:userId", async (req: Request, res: Response) => {
-    const groupId = parseInt(req.params.groupId)
-    const userId = parseInt(req.params.userId)
-
-    try {
-        const group = await Group.findByPk(groupId)
-        if (!group) {
-            return res.status(404).json({ message: "Group not found." })
-        }
-        const user = await User.findByPk(userId)
-        if (!user) {
-            return res.status(404).json({ message: "User not found." })
-        }
-
-
         return res.status(200).json({ message: "User removed from group successfully." })
     } catch (error) {
         console.error("Error removing user from group:", error)

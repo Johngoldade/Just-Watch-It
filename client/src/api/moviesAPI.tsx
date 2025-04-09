@@ -1,14 +1,14 @@
 import Auth from '../utils/auth'
-import { Movie } from '../interfaces/movies'
+import { Movie, TmdbReturn } from '../interfaces/movies'
 
 
 const retrieveTMDBMovies = async (): Promise<Movie[]> => {
     try {
-        const response = await fetch('/api/movies/', 
+        const response = await fetch('/tmdb/movies/', 
             {
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${Auth.getToken()}`
+                    // Authorization: `Bearer ${Auth.getToken()}`
                 }
             })
 
@@ -16,7 +16,9 @@ const retrieveTMDBMovies = async (): Promise<Movie[]> => {
             throw new Error ('Invalid API response')
         }
 
-        const movieList: Movie[] = await response.json()
+        const returnedList: TmdbReturn = await response.json()
+        const movieList: Movie[] = returnedList.results
+        console.log(movieList)
         return movieList
 
     } catch (error) {
@@ -30,7 +32,7 @@ const retrieveMyMovies = async (): Promise<Movie[]> => {
     try {
         const token: string = Auth.getToken()
         if (token) {
-            const response = await fetch(`/api/favorites`, {
+            const response = await fetch(`/db/favorites`, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`
@@ -57,7 +59,7 @@ const addFavoriteMovie = async (movieId: number) => {
     try {
         const token: string = Auth.getToken()
         if (token) {
-            await fetch(`/api/favorites`, {
+            await fetch(`/db/favorites`, {
                 method:'POST',
                 headers: {
                     'Content-Type': 'application/json',

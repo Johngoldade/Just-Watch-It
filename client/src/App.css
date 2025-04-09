@@ -1,8 +1,11 @@
 #root {
-  max-width: 1280px;
+  width: 100%;
+  height: 100vh;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
+  background-color: #252323;
+  color: #f9f9f9;
 }
 
 .logo {
@@ -39,4 +42,41 @@
 
 .read-the-docs {
   color: #888;
+}
+
+
+/* Navbar.css */
+.navbar {
+  background-color: #333;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-nav {
+  list-style-type: none;
+  display: flex;
+}
+
+.nav-item {
+  margin: 0 15px;
+}
+
+.nav-button {
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  text-decoration: none; /* Remove underline from Link */
+  border-radius: 5px;
+}
+
+.nav-button:hover {
+  background-color: #0056b3;
+}
+
+.nav-button.active {
+  background-color: #28a745; /* Active button color */
 }
