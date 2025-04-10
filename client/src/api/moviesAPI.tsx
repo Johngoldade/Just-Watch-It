@@ -28,11 +28,11 @@ const retrieveTMDBMovies = async (): Promise<Movie[]> => {
 }
 
 
-const retrieveMyMovies = async (): Promise<Movie[]> => {
+const retrieveMyMovies = async (): Promise<number[]> => {
     try {
         const token: string = Auth.getToken()
         if (token) {
-            const response = await fetch(`/db/favorites`, {
+            const response = await fetch(`/db/favorites/mymovies`, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`
@@ -43,7 +43,7 @@ const retrieveMyMovies = async (): Promise<Movie[]> => {
                 throw new Error ('Invalid API response')
             }
 
-            const userFavorites: Movie[] = await response.json()
+            const userFavorites: number[] = await response.json()
             return userFavorites
         } else {
             console.log('No token')
@@ -57,21 +57,27 @@ const retrieveMyMovies = async (): Promise<Movie[]> => {
 
 const addFavoriteMovie = async (movieId: number) => {
     try {
-        const token: string = Auth.getToken()
-        if (token) {
-            await fetch(`/db/favorites`, {
-                method:'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
-                },
-                body: JSON.stringify({ movieId })
-            })
-        } else {
-            console.log('No Token')
+        const token = Auth.getToken();
+        if (!token) {
+            console.log('No valid token found');
+            return;
+        }
+
+        console.log(movieId);
+        const response = await fetch(`/db/favorites/mymovies`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({ movieId })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to add favorite movie');
         }
     } catch (error) {
-        console.error(`Movie was not added to your list for the following reason => ${error}`)
+        console.error(`Movie was not added to your list for the following reason => ${error}`);
     }
 }
 

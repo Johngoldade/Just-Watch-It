@@ -6,9 +6,10 @@ import { User } from "../../models/User.js"
 const router = express.Router()
 
 // Get all favorites for a user
-router.get("/favorites", async (req: Request, res: Response) => {
-    const user: string | undefined = req.user?.username
-
+router.get("/mymovies", async (req: Request, res: Response) => {
+    console.log('here')
+    const user: number | undefined = req.user?.id
+    
     try {
         if (!user) {
             res.sendStatus(401)
@@ -17,7 +18,7 @@ router.get("/favorites", async (req: Request, res: Response) => {
 
         const userInfo = await User.findOne({
             where: {
-                username: user,
+                id: user,
             }
         })
         
@@ -27,12 +28,7 @@ router.get("/favorites", async (req: Request, res: Response) => {
         }
 
         const favorites = await Favorite.findAll({
-            where: { userId: userInfo.id },
-            include: [{
-                model: User,
-                as: 'user',
-                attributes: ['id', 'name', 'username']
-            }]
+            where: { userId: userInfo.id }
         })
 
         if (!favorites || favorites.length === 0) {
@@ -47,15 +43,19 @@ router.get("/favorites", async (req: Request, res: Response) => {
 })
 
 // Add a favorite for a user
-router.post("/favorites", async (req: Request, res: Response) => {
+router.post("/mymovies", async (req: Request, res: Response) => {
     const { movieId } = req.body
-
+    
     if (!movieId) {
         return res.status(400).json({ message: "Movie ID is required." })
     }
 
-    const user: string | undefined = req.user?.username
+    const user: number | undefined = req.user?.id
 
+    if (!user) {
+        res.sendStatus(401)
+        return
+    }
     try {
         if (!user) {
             res.sendStatus(401)
@@ -64,7 +64,7 @@ router.post("/favorites", async (req: Request, res: Response) => {
 
         const userInfo = await User.findOne({
             where: {
-                username: user,
+                id: user,
             }
         })
         
@@ -75,8 +75,7 @@ router.post("/favorites", async (req: Request, res: Response) => {
 
         const existingFavorite = await Favorite.findOne({
             where: {
-                userId: userInfo.id,
-                movieId: movieId
+                id: movieId
             }
         })
 
@@ -85,8 +84,8 @@ router.post("/favorites", async (req: Request, res: Response) => {
         }
 
         const newFavorite = await Favorite.create({
-            userId: userInfo.id,
-            movieId: movieId
+            id: movieId,
+            userId: userInfo.id
         })
 
         return res.status(201).json(newFavorite)
@@ -97,9 +96,9 @@ router.post("/favorites", async (req: Request, res: Response) => {
 })
 
 // Remove a favorite for a user
-router.delete("/favorites/:movieId", async (req: Request, res: Response) => {
-    const movieId = req.params.movieId
-    const user: string | undefined = req.user?.username
+router.delete("/mymovies/:movieId", async (req: Request, res: Response) => {
+    // const movieId = req.params.movieId
+    const user: number | undefined = req.user?.id
 
     try {
         if (!user) {
@@ -109,7 +108,7 @@ router.delete("/favorites/:movieId", async (req: Request, res: Response) => {
 
         const userInfo = await User.findOne({
             where: {
-                username: user,
+                id: user,
             }
         })
         
@@ -121,7 +120,6 @@ router.delete("/favorites/:movieId", async (req: Request, res: Response) => {
         const favorite = await Favorite.findOne({
             where: {
                 userId: userInfo.id,
-                movieId: movieId
             }
         })
 
@@ -139,8 +137,8 @@ router.delete("/favorites/:movieId", async (req: Request, res: Response) => {
 })
 
 // Clear all favorites for a user
-router.delete("/favorites", async (req: Request, res: Response) => {
-    const user: string | undefined = req.user?.username
+router.delete("/mymovies", async (req: Request, res: Response) => {
+    const user: number | undefined = req.user?.id
 
     try {
         if (!user) {
@@ -150,7 +148,7 @@ router.delete("/favorites", async (req: Request, res: Response) => {
 
         const userInfo = await User.findOne({
             where: {
-                username: user,
+                id: user,
             }
         })
         

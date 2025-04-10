@@ -1,40 +1,34 @@
-import {
-    Model,
-    type InferAttributes,
-    type InferCreationAttributes,
-    type CreationOptional,
-    DataTypes,
-    type Sequelize,
-    type ForeignKey,
-} from 'sequelize';
+import { Model, DataTypes, Sequelize, Optional } from 'sequelize';
+import bcrypt from 'bcrypt';
 
-import { Favorite } from './Favorite.js'
-import { Group } from './Group.js';
+interface UserAttributes {
+    id: number;
+    username: string;
+    email: string;
+    password: string;
+  }
 
-export class User extends Model<
-    InferAttributes<User>,
-    InferCreationAttributes<User>
-> {
-    declare id: CreationOptional<number>;
-    declare name: string;
-    declare email: string;
-    declare username: string;
-    declare password: string;
-    declare favorites: ForeignKey<Favorite['id']>
-    declare primaryGroup: ForeignKey<Group['id']>
+interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
+
+export class User extends Model<UserAttributes, UserCreationAttributes> {
+    public id!: number
+    public email!: string
+    public username!: string
+    public password!: string
+
+    public async setPassword(password: string) {
+        const saltRounds = 10;
+        this.password = await bcrypt.hash(password, saltRounds);
+      }
 }
 
-export function UserFactory(sequelize: Sequelize){
+export function UserFactory(sequelize: Sequelize): typeof User{
     User.init(
         {
             id: {
                 type: DataTypes.INTEGER,
                 autoIncrement: true,
                 primaryKey: true,
-                allowNull: false,
-            },
-            name: {
-                type: DataTypes.STRING,
                 allowNull: false,
             },
             email: {
@@ -50,29 +44,22 @@ export function UserFactory(sequelize: Sequelize){
             password: {
                 type: DataTypes.STRING,
                 allowNull: false,
-            },
-            favorites: {
-                type: DataTypes.INTEGER,
-                allowNull: true,
-                references: {
-                    model: Favorite,
-                    key: 'id'
-                }
-            },
-            primaryGroup: {
-                type: DataTypes.INTEGER,
-                allowNull: true,
-                references: {
-                    model: User,
-                    key: 'id'
-                }
             }
         },
         {
             sequelize,
             timestamps: false,
             underscored: true,
-            modelName: 'users'
+            modelName: 'users',
+            tableName:'users',
+            hooks: {
+                beforeCreate: async (user: any) => {
+                    if (user.password) {
+                        const saltRounds = 10;
+                        user.password = await bcrypt.hash(user.password, saltRounds);
+                    }
+                }
+            }
         }
 
     )

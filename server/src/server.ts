@@ -1,25 +1,11 @@
-// const forceDatabaseRefresh = true // Set to false once the app is up
+
 
 import dotenv from 'dotenv'
 dotenv.config()
 
 import express from 'express'
 import routes from './routes/index.js'
-import { Sequelize } from 'sequelize'
-
-const sequelize = process.env.DB_URL ? new Sequelize(process.env.DB_URL) : 
-    new Sequelize({ 
-    dialect: 'postgres',
-    database: process.env.DB_NAME || '',
-    username: process.env.DB_USER || '',
-    password: process.env.DB_PASSWORD || '',
-    host: 'localhost',
-    port: 5432,
-    ssl: true,
-    clientMinMessages: 'notice',
-  });
-  
-  
+import sequelize from './config/connection.js'
 
 const app = express()
 const PORT = process.env.PORT || 3001

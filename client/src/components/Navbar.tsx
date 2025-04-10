@@ -24,10 +24,8 @@ const Navbar = () => {
                         <li className="nav-item px-2">
                             <Link to="/Mymovies" className={location === '/Mymovies' ? 'title2' : 'title1'}>My Movies</Link>
                         </li>
-                        <li>
-                            <Link to="/login">
-                                <button className="btn btn-outline-light">Login</button>
-                            </Link>
+                        <li className="nav-item px-2">
+                            <Link to="/Login"><button className="btn btn-outline-light">Login</button></Link>
                         </li>
                     </ul>
                     <div className="d-flex align-items-center ms-auto">

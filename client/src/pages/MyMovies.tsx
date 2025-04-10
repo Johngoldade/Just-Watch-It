@@ -5,18 +5,12 @@ import { retrieveMyMovies } from '../api/moviesAPI'
 
 
 export default function MyMovies() {
-    const [ myMovies, setMyMovies ] = useState<Movie[]>([{
-        id: NaN,
-        overview: '',
-        release_date: '',
-        title: '',
-        poster_path: ''
-    }])
+    const [ myMovies, setMyMovies ] = useState<Movie[]>([])
     
     useEffect(() => {
         const getMyMovies = async () => {
-            const favorites: Movie[] = await retrieveMyMovies()
-            setMyMovies(favorites)
+            const favorites: number[] = await retrieveMyMovies()
+            setMyMovies([])
             return
         }
         getMyMovies()
