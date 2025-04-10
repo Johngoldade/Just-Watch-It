@@ -64,6 +64,16 @@ main {
   color: #3f88c5
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  align-content:flex-start ;
+}
+
+input {
+  margin: 10px
+}
+
 a {
   font-weight: 500;
   color: antiquewhite;
@@ -96,10 +106,9 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  margin: 10px
 }
-button:hover {
-  border-color: #646cff;
-}
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;

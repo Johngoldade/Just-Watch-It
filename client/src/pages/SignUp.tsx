@@ -70,7 +70,7 @@ export default function SignUp() {
                     value={user.password || ''}
                     onChange={handleChange}
                 />
-                <button type='submit' onClick={handleSubmit}>Sign Up</button>
+                <button type='submit' onClick={handleSubmit} className='btn btn-outline-light'>Sign Up</button>
             </form>
             <div>
                 <h2>Users</h2>

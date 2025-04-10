@@ -27,7 +27,16 @@ export default function Login() {
             const response = await login(user)
             if (response) {
                 Auth.login(response.token)
+                setUser({
+                    id: null,
+                    username: null,
+                    email: null,
+                    password: null,
+                    favorites: null,
+                    primaryGroup: null,
+                })
             }
+            
             console.log('Login successful:', response)
         } catch (error) {
             console.error('Login failed:', error)
@@ -64,10 +73,8 @@ export default function Login() {
                     onChange={handleChange}
                 />
             </form>
-            <button type='submit'>Login</button>
-            <Link to='/signup'>
-                <button className='btn btn-outline-light'>Signup</button>
-            </Link>
+            <button className='btn btn-outline-light' type='submit' onClick={handleSubmit}>Login</button>
+            <button className='btn btn-outline-light'><Link to='/signup'>Signup</Link></button>
             <h2>Existing Users</h2>
             <ul>
                 {users.map((u) => (

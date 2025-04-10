@@ -28,7 +28,7 @@ const retrieveTMDBMovies = async (): Promise<Movie[]> => {
 }
 
 
-const retrieveMyMovies = async (): Promise<number[]> => {
+const retrieveMyMovies = async (): Promise<Movie[]> => {
     try {
         const token: string = Auth.getToken()
         if (token) {
@@ -43,7 +43,7 @@ const retrieveMyMovies = async (): Promise<number[]> => {
                 throw new Error('Invalid API response')
             }
 
-            const userFavorites: number[] = await response.json()
+            const userFavorites: Movie[] = await response.json()
             return userFavorites
         } else {
             console.log('No token')
