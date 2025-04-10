@@ -1,26 +1,18 @@
-import {
-    CreationOptional,
-    ForeignKey,
-    Model,
-    type InferAttributes,
-    type InferCreationAttributes,
-    DataTypes,
-    type Sequelize,
-} from 'sequelize';
+import {Optional, Model, DataTypes, Sequelize } from 'sequelize';
 
-import { User } from './User.js'
-import { Movie } from './Movie.js';
+interface FavoriteAttributes {
+    id: number;
+    userId: number;
+  }
 
-export class Favorite extends Model<
-    InferAttributes<Favorite>,
-    InferCreationAttributes<Favorite>
-> {
-    declare id: CreationOptional<number>;
-    declare userId: ForeignKey<User['id']>;// Note: 'userID' was changed to 'userId' for consistency
-    declare movieId: ForeignKey<Movie['imdbID']>;
+interface FavoriteCreationAttributes extends Optional<FavoriteAttributes, 'id'> {}
+
+export class Favorite extends Model<FavoriteAttributes,FavoriteCreationAttributes> {
+    public id!: number
+    public userId!: number
 }
 
-export function FavoriteFactory(sequelize: Sequelize) {
+export function FavoriteFactory(sequelize: Sequelize): typeof Favorite {
     Favorite.init(
         {
             id: {
@@ -29,12 +21,21 @@ export function FavoriteFactory(sequelize: Sequelize) {
                 primaryKey: true,
                 allowNull: false,
             },
+            userId: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'users',
+                    key: 'id'
+                }
+            },
         },
         {
             sequelize,
             timestamps: false,
             underscored: true,
-            modelName: 'favorites'
+            modelName: 'favorites',
+            tableName: 'favorites'
         }
     )
 

@@ -31,35 +31,13 @@ router.get("/:id", async (req: Request, res: Response) => {
     }
 })
 
-// Create a new user
-router.post("/", async (req: Request, res: Response) => {
-    const { username, email, password } = req.body
-
-    if (!username || !email || !password) {
-        res.status(400).json({ message: "Username, email, and password are required." });
-    }
-
-    try {
-        const newUser = await User.create({
-            name: req.body.name,
-            username,
-            email,
-            password
-        })
-
-        res.status(201).json(newUser)
-    } catch (error) {
-        console.error("Error creating user:", error)
-        res.status(500).json({ message: "Internal server error" })
-    }
-})
 
 // Update a user by ID
 router.put("/:id", async (req: Request, res: Response) => {
     const userId = req.params.id;
-    const { name, username, email, password } = req.body;
+    const { username, email, password } = req.body;
 
-    if (!name && !username && !email && !password) {
+    if ( !username && !email && !password) {
         return res.status(400).json({ message: "No fields to update." });
     }
 
@@ -69,7 +47,7 @@ router.put("/:id", async (req: Request, res: Response) => {
             return res.status(404).json({ message: "User not found" });
         }
 
-        if (name !== undefined) user.name = name;
+        // if (name !== undefined) user.name = name;
         if (username !== undefined) user.username = username;
         if (email !== undefined) user.email = email;
         if (password !== undefined) user.password = password;

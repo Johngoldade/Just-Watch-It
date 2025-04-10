@@ -2,31 +2,37 @@ import { useEffect, useState } from 'react'
 import { User } from '../interfaces/User'
 import { login } from '../api/authAPI'
 import { retrieveUsers } from '../api/userAPI'
+import { createUser } from '../api/createUser'
 
 export default function SignUp() {
     const [user, setUser] = useState<User>({
-        id: null,
-        username: null,
-        email: null,
-        password: null,
-        favorites: null,
-        primaryGroup: null,
+        username: '',
+        email: '',
+        password: ''
     })
 
     const [users, setUsers] = useState<User[]>([])
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUser({ ...user, [e.target.name]: e.target.value })
+        console.log(user)
     }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         try {
-            const response = await login(user)
-            console.log('Login successful:', response)
+            if (user.username && user.email && user.password) {
+                const response = await createUser(user.username, user.email, user.password)
+                console.log('Login successful:', response)
+            }
+
+            setUser({username: '',email: '',password: ''})
+            
         } catch (error) {
             console.error('Login failed:', error)
         }
+
+
     }
     useEffect(() => {
         const fetchUsers = async () => {
@@ -65,7 +71,7 @@ export default function SignUp() {
                     value={user.password || ''}
                     onChange={handleChange}
                 />
-                <button type="submit">Sign Up</button>
+                <button type="submit" onClick={handleSubmit}>Sign Up</button>
             </form>
             <div>
                 <h2>Users</h2>

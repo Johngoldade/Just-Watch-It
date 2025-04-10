@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { User } from '../interfaces/User'
 import { login } from '../api/authAPI'
 import { retrieveUsers } from '../api/userAPI'
+import Auth from '../utils/auth'
 
 export default function Login() {
     const [user, setUser] = useState<User>({
@@ -23,6 +24,9 @@ export default function Login() {
         e.preventDefault()
         try {
             const response = await login(user)
+            if (response) {
+              Auth.login(response.token)  
+            }
             console.log('Login successful:', response)
         } catch (error) {
             console.error('Login failed:', error)
