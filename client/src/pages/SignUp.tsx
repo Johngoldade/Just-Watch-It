@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { User } from '../interfaces/User'
-import { login } from '../api/authAPI'
 import { retrieveUsers } from '../api/userAPI'
 import { createUser } from '../api/createUser'
 
