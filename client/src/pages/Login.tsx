@@ -42,6 +42,18 @@ export default function Login() {
             console.error('Login failed:', error)
         }
     }
+
+    const handleLogout = async (e: React.FormEvent) => {
+        e.preventDefault()
+        try {
+            Auth.logout()
+            console.log('Logged out')
+        } catch (error) {
+            console.error('Login failed:', error)
+        }
+    }
+
+
     useEffect(() => {
         const fetchUsers = async () => {
             try {
@@ -55,32 +67,35 @@ export default function Login() {
     }, [])
 
     return (
-        <div>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type='text'
-                    name='username'
-                    placeholder='Username'
-                    value={user.username || ''}
-                    onChange={handleChange}
-                />
-                <input
-                    type='password'
-                    name='password'
-                    placeholder='Password'
-                    value={user.password || ''}
-                    onChange={handleChange}
-                />
-            </form>
-            <button className='btn btn-outline-light' type='submit' onClick={handleSubmit}>Login</button>
-            <button className='btn btn-outline-light'><Link to='/signup'>Signup</Link></button>
-            <h2>Existing Users</h2>
-            <ul>
-                {users.map((u) => (
-                    <li key={u.id}>{u.username}</li>
-                ))}
-            </ul>
-        </div>
+        <>
+            <div>
+                <h1>Login</h1>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type='text'
+                        name='username'
+                        placeholder='Username'
+                        value={user.username || ''}
+                        onChange={handleChange}
+                    />
+                    <input
+                        type='password'
+                        name='password'
+                        placeholder='Password'
+                        value={user.password || ''}
+                        onChange={handleChange}
+                    />
+                </form>
+                <button className='btn btn-outline-light' type='submit' onClick={handleSubmit}>Login</button>
+                <button className='btn btn-outline-light' onClick={handleLogout}>Log Out</button>
+                <button className='btn btn-outline-light'><Link to='/signup'>Signup</Link></button>
+                <h2>Existing Users</h2>
+                <ul>
+                    {users.map((u) => (
+                        <li key={u.id}>{u.username}</li>
+                    ))}
+                </ul>
+            </div>
+        </>
     )
 }

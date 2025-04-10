@@ -70,10 +70,12 @@ main {
   color: #3f88c5
 }
 
-form {
+
+.form-div {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-content:flex-start ;
+  align-content: center;
 }
 
 input {
