@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react'
 import { Movie} from '../interfaces/movies'
-import { retrieveMyMovies } from '../api/moviesAPI'
+import { retrieveTMDBMovies, retrieveMyMovies } from '../api/moviesAPI'
 
 
 export default function MyMovies() {
@@ -10,7 +10,13 @@ export default function MyMovies() {
     useEffect(() => {
         const getMyMovies = async () => {
             const favorites: number[] = await retrieveMyMovies()
-            setMyMovies([])
+            
+            const allMovies = await retrieveTMDBMovies()
+
+            const favoriteMovies = allMovies.filter((movie: Movie) =>
+            favorites.includes(movie.id))
+
+            setMyMovies(favoriteMovies)
             return
         }
         getMyMovies()

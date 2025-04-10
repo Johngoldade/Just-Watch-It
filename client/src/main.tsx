@@ -13,8 +13,6 @@ import MyMovies from './pages/MyMovies.tsx'
 import Login from './pages/Login.tsx'
 import Signup from './pages/SignUp.tsx'
 import ErrorPage from './pages/Error.tsx'
-import Login from './pages/Login.tsx'
-
 
 const router = createBrowserRouter([
   {
