@@ -35,19 +35,21 @@ export default function MovieDBBody() {
                 <SearchInput value={searchTerm} onChange={setSearchTerm} />
             </div>
 
-            {filteredMovies.map((movie: Movie) => (
-                <div className='card m-5 text-bg-light' style={{ width: '25rem' }} key={movie.id}>
-                    <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} className='card-img-top' alt={`Poster for ${movie.title}`} />
-                    <div className='card-body'>
-                        <h5 className='card-title'>{movie.title}</h5>
-                        <p className='card-text'>{movie.overview}</p>
+            <div className='main-child'>
+                {filteredMovies.map((movie: Movie) => (
+                    <div className='card m-5 text-bg-light' style={{ width: '25rem' }} key={movie.id}>
+                        <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} className='card-img-top' alt={`Poster for ${movie.title}`} />
+                        <div className='card-body'>
+                            <h5 className='card-title'>{movie.title}</h5>
+                            <p className='card-text'>{movie.overview}</p>
+                        </div>
+                        <ul className='list-group list-group-flush'>
+                            <li className='list-group-item'>Released On: {movie.release_date}</li>
+                        </ul>
+                        <button className='btn btn-primary' onClick={() => addMovie(movie.id)}>Save to Favorites</button>
                     </div>
-                    <ul className='list-group list-group-flush'>
-                        <li className='list-group-item'>Released On: {movie.release_date}</li>
-                    </ul>
-                    <button className='btn btn-primary' onClick={() => addMovie(movie.id)}>Save to Favorites</button>
-                </div>
-            ))}
+                ))}
+            </div>
         </>
     )
 }

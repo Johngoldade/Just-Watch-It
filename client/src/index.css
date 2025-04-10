@@ -29,6 +29,12 @@ main {
   border-top: 3px solid #3f88c5;
   padding: 10px;
   display:flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.main-child {
+  display:flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
