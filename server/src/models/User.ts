@@ -6,9 +6,9 @@ interface UserAttributes {
     username: string;
     email: string;
     password: string;
-  }
+}
 
-interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
+interface UserCreationAttributes extends Optional<UserAttributes, 'id'> { }
 
 export class User extends Model<UserAttributes, UserCreationAttributes> {
     public id!: number
@@ -19,10 +19,10 @@ export class User extends Model<UserAttributes, UserCreationAttributes> {
     public async setPassword(password: string) {
         const saltRounds = 10;
         this.password = await bcrypt.hash(password, saltRounds);
-      }
+    }
 }
 
-export function UserFactory(sequelize: Sequelize): typeof User{
+export function UserFactory(sequelize: Sequelize): typeof User {
     User.init(
         {
             id: {
@@ -51,7 +51,7 @@ export function UserFactory(sequelize: Sequelize): typeof User{
             timestamps: false,
             underscored: true,
             modelName: 'users',
-            tableName:'users',
+            tableName: 'users',
             hooks: {
                 beforeCreate: async (user: any) => {
                     if (user.password) {

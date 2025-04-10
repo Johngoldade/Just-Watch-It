@@ -5,11 +5,11 @@ interface SearchInputProps {
 
 export default function SearchInput({ value, onChange }: SearchInputProps) {
     return (
-        <div className="m-4">
+        <div className='m-4'>
             <input
-                type="text"
-                className="search"
-                placeholder="Search for a movie..."
+                type='text'
+                className='search'
+                placeholder='Search for a movie...'
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
             />
@@ -35,7 +35,7 @@ export default function SearchInput({ value, onChange }: SearchInputProps) {
 //     }
 
 //     return (
-//         <form id="searchform">
+//         <form id='searchform'>
 //             <input
 //                 type='text'
 //                 name='search'

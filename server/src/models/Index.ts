@@ -16,5 +16,5 @@ Favorite.belongsTo(User, {
     foreignKey: 'userId',
     onDelete: 'CASCADE',
 })
-   
+
 export { User, Favorite };

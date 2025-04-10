@@ -18,16 +18,16 @@ const retrieveUsers = async () => {
         return data
     } catch (err) {
         console.log('Error from data retrival: ', err);
-        return[];
+        return [];
     }
 }
 
-const getPriorityGroup= async () => {
+const getPriorityGroup = async () => {
     try {
 
     } catch (err) {
         console.log('Error from data retival:', err);
-        return[];
+        return [];
     }
 }
 

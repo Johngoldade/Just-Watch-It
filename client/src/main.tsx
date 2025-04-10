@@ -22,11 +22,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage /> 
+        element: <HomePage />
       },
       {
         path: '/Movies',
-        element: <MovieDB /> 
+        element: <MovieDB />
       },
       {
         path: '/Groups',
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
       {
         path: '/Mymovies',
         element: <MyMovies />
-      }, 
+      },
       {
         path: '/login',
         element: <Login />
