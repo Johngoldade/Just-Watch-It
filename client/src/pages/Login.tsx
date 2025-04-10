@@ -9,6 +9,8 @@ export default function Login() {
         username: null,
         email: null,
         password: null,
+        favorites: null,
+        primaryGroup: null,
     })
 
     const [users, setUsers] = useState<User[]>([])
