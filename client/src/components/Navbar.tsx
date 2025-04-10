@@ -1,5 +1,4 @@
 import { Link, useLocation } from 'react-router-dom';
-import Search from './Search'
 
 const Navbar = () => {
     const location = useLocation().pathname;
@@ -30,11 +29,6 @@ const Navbar = () => {
                             </Link>
                         </li>
                     </ul>
-                    <div className="d-flex align-items-center ms-auto">
-                        <div className="ps-5 pe-2">
-                            < Search />
-                        </div>
-                    </div>
                 </section >
             </div>
         </nav >
