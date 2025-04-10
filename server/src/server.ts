@@ -15,7 +15,7 @@ app.use(express.static('../client/dist'))
 app.use(express.json())
 app.use(routes)
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: true }).then(() => {
     app.listen( PORT, () => {
         console.log(`Server listening on port ${PORT}`)
     })
