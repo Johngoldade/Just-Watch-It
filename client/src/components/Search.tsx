@@ -4,8 +4,8 @@ const Search = () => {
     const [searchInput, setSearchInput] = useState('')
 
     const handleChange = (e: { target: any; }) => {
-        const value = e.target
-        
+        const value = e.target.value     
+           
         return setSearchInput(value)
     }
 
