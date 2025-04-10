@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { User } from '../interfaces/User'
 import { login } from '../api/authAPI'
 import { retrieveUsers } from '../api/userAPI'
@@ -58,8 +59,11 @@ export default function Login() {
                     value={user.password || ''}
                     onChange={handleChange}
                 />
-                <button type="submit">Login</button>
             </form>
+            <button type="submit">Login</button>
+            <Link to="/signup">
+                <button className="btn btn-outline-light">Signup</button>
+            </Link>
             <h2>Existing Users</h2>
             <ul>
                 {users.map((u) => (
