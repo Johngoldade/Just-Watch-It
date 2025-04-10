@@ -31,16 +31,16 @@ export default function Home() {
           {/* <blockquote>"{quote.quote}"</blockquote>
           <p>- {quote.author}</p> */}
           <blockquote >"{quote.joke}"</blockquote>
-        <div>
+        {/* <div>
           <blockquote>'{quote.quote}'</blockquote>
-          <p>- {quote.author}</p>
+          <p>- {quote.author}</p> */}
         </div>
       )}
     </div>
   )
 }
 
-// export default function HomePage() {
+// export default function HomePage() 
 
 
 //     return (
@@ -54,5 +54,4 @@ export default function Home() {
 //             </div>
 //         </>
 //     )
-// >>>>>>> main
 // }
