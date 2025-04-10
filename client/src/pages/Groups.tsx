@@ -19,9 +19,9 @@ const GroupPage: React.FC = () => {
   const createGroup = () => {
     if (groupName.trim()) {
       const newGroup: Group = {
-        id: groups.length + 1,  
+        id: groups.length + 1,
         name: groupName,
-        members: [newUserName] 
+        members: [newUserName]
         // Add the user who created the group
       };
       setGroups([...groups, newGroup]);
@@ -64,16 +64,16 @@ const GroupPage: React.FC = () => {
       {/* Create Group Section */}
       <div>
         <input
-          type="text"
+          type='text'
           value={groupName}
           onChange={(e) => setGroupName(e.target.value)}
-          placeholder="Enter group name for movie night"
+          placeholder='Enter group name for movie night'
         />
         <input
-          type="text"
+          type='text'
           value={newUserName}
           onChange={(e) => setNewUserName(e.target.value)}
-          placeholder="Enter your name"
+          placeholder='Enter your name'
         />
         <button onClick={createGroup}>Create Group</button>
       </div>

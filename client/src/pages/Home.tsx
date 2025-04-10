@@ -24,7 +24,7 @@ export default function Home() {
       <p>Use the navigation bar to explore the app.</p>
       {quote && (
         <div>
-          <blockquote>"{quote.quote}"</blockquote>
+          <blockquote>'{quote.quote}'</blockquote>
           <p>- {quote.author}</p>
         </div>
       )}

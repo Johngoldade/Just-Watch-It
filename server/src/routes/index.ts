@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.use('/auth', auth)
 router.use('/tmdb', tmdbRouter)
-router.use('/db',  authenticationToken, dbRouter);
+router.use('/db', authenticationToken, dbRouter);
 router.use('/user', createRouter)
 
 

@@ -4,7 +4,7 @@ import { Movie, TmdbReturn } from '../interfaces/movies'
 
 const retrieveTMDBMovies = async (): Promise<Movie[]> => {
     try {
-        const response = await fetch('/tmdb/movies/', 
+        const response = await fetch('/tmdb/movies/',
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ const retrieveTMDBMovies = async (): Promise<Movie[]> => {
             })
 
         if (!response.ok) {
-            throw new Error ('Invalid API response')
+            throw new Error('Invalid API response')
         }
 
         const returnedList: TmdbReturn = await response.json()
@@ -40,7 +40,7 @@ const retrieveMyMovies = async (): Promise<number[]> => {
             })
 
             if (!response.ok) {
-                throw new Error ('Invalid API response')
+                throw new Error('Invalid API response')
             }
 
             const userFavorites: number[] = await response.json()
