@@ -31,6 +31,9 @@ export default function Home() {
           {/* <blockquote>"{quote.quote}"</blockquote>
           <p>- {quote.author}</p> */}
           <blockquote >"{quote.joke}"</blockquote>
+        <div>
+          <blockquote>'{quote.quote}'</blockquote>
+          <p>- {quote.author}</p>
         </div>
       )}
     </div>

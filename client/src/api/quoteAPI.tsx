@@ -1,4 +1,4 @@
-import { Quote } from "../interfaces/quote"
+import { Quote } from '../interfaces/quote'
 
 export const fetchQuote = async (): Promise<Quote | null> => {
     try {

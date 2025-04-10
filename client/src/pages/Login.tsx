@@ -26,7 +26,7 @@ export default function Login() {
         try {
             const response = await login(user)
             if (response) {
-              Auth.login(response.token)  
+                Auth.login(response.token)
             }
             console.log('Login successful:', response)
         } catch (error) {
@@ -44,29 +44,29 @@ export default function Login() {
         }
         fetchUsers()
     }, [])
-    
+
     return (
         <div>
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
                 <input
-                    type="text"
-                    name="username"
-                    placeholder="Username"
+                    type='text'
+                    name='username'
+                    placeholder='Username'
                     value={user.username || ''}
                     onChange={handleChange}
                 />
                 <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
+                    type='password'
+                    name='password'
+                    placeholder='Password'
                     value={user.password || ''}
                     onChange={handleChange}
                 />
             </form>
-            <button type="submit">Login</button>
-            <Link to="/signup">
-                <button className="btn btn-outline-light">Signup</button>
+            <button type='submit'>Login</button>
+            <Link to='/signup'>
+                <button className='btn btn-outline-light'>Signup</button>
             </Link>
             <h2>Existing Users</h2>
             <ul>

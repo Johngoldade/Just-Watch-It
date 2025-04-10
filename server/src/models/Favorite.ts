@@ -1,13 +1,13 @@
-import {Optional, Model, DataTypes, Sequelize } from 'sequelize';
+import { Optional, Model, DataTypes, Sequelize } from 'sequelize';
 
 interface FavoriteAttributes {
     id: number;
     userId: number;
-  }
+}
 
-interface FavoriteCreationAttributes extends Optional<FavoriteAttributes, 'id'> {}
+interface FavoriteCreationAttributes extends Optional<FavoriteAttributes, 'id'> { }
 
-export class Favorite extends Model<FavoriteAttributes,FavoriteCreationAttributes> {
+export class Favorite extends Model<FavoriteAttributes, FavoriteCreationAttributes> {
     public id!: number
     public userId!: number
 }

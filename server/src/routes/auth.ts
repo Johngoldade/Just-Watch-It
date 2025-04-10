@@ -1,7 +1,7 @@
-import { Router, Request, Response } from "express"
-import bcrypt from "bcrypt"
-import jwt from "jsonwebtoken"
-import { User } from "../models/User.js"
+import { Router, Request, Response } from 'express'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import { User } from '../models/User.js'
 
 export const login = async (req: Request, res: Response) => {
     const { username, password } = req.body

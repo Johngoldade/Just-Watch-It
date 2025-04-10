@@ -4,7 +4,7 @@ import express from 'express'
 const router = express.Router()
 
 // GET request to fetch movies
-router.get('/', async (_req: Request, res: Response) =>{
+router.get('/', async (_req: Request, res: Response) => {
     try {
         console.log(process.env.API_TOKEN)
         const response = await fetch ('https://api.themoviedb.org/3/discover/movie?language=en-US&page=121&sort_by=popularity.desc',
@@ -16,7 +16,7 @@ router.get('/', async (_req: Request, res: Response) =>{
         )
 
         if (!response.ok) {
-            throw new Error ('Invalid API response')
+            throw new Error('Invalid API response')
         }
 
         const movies = await response.json()
@@ -31,11 +31,11 @@ router.get('/', async (_req: Request, res: Response) =>{
 })
 
 // GET request to find the information for a specific movie
-router.get('/:movie', async (req: Request, res: Response) =>{
+router.get('/:movie', async (req: Request, res: Response) => {
     const { movie } = req.params
 
     try {
-        const response = await fetch (`https://api.themoviedb.org/3/search/movie?query=${movie}&include_adult=false&language=en-US&page=1`,
+        const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${movie}&include_adult=false&language=en-US&page=1`,
             {
                 headers: {
                     Authorization: `Bearer ${process.env.API_TOKEN}`
@@ -44,7 +44,7 @@ router.get('/:movie', async (req: Request, res: Response) =>{
         )
 
         if (!response.ok) {
-            throw new Error ('Invalid API response')
+            throw new Error('Invalid API response')
         }
 
         const movies = await response.json()

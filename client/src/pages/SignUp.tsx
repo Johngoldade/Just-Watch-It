@@ -25,8 +25,8 @@ export default function SignUp() {
                 console.log('Login successful:', response)
             }
 
-            setUser({username: '',email: '',password: ''})
-            
+            setUser({ username: '', email: '', password: '' })
+
         } catch (error) {
             console.error('Login failed:', error)
         }
@@ -44,33 +44,33 @@ export default function SignUp() {
         }
         fetchUsers()
     }
-    , [])
+        , [])
     return (
         <div>
             <h1>Sign Up</h1>
             <form onSubmit={handleSubmit}>
                 <input
-                    type="text"
-                    name="username"
-                    placeholder="Username"
+                    type='text'
+                    name='username'
+                    placeholder='Username'
                     value={user.username || ''}
                     onChange={handleChange}
                 />
                 <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
+                    type='email'
+                    name='email'
+                    placeholder='Email'
                     value={user.email || ''}
                     onChange={handleChange}
                 />
                 <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
+                    type='password'
+                    name='password'
+                    placeholder='Password'
                     value={user.password || ''}
                     onChange={handleChange}
                 />
-                <button type="submit" onClick={handleSubmit}>Sign Up</button>
+                <button type='submit' onClick={handleSubmit}>Sign Up</button>
             </form>
             <div>
                 <h2>Users</h2>
