@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react'
 import { fetchQuote } from '../api/quoteAPI'
 
+// interface Quote {
+//   quote: string;
+//   author: string;
+// }
+
 interface Quote {
-  quote: string;
-  author: string;
+  joke: string | null;
 }
 
 export default function Home() {
@@ -11,7 +15,7 @@ export default function Home() {
 
   useEffect(() => {
     const getQuote = async () => {
-      const fetchedQuote = await fetchQuote()
+      const fetchedQuote: Quote | null= await fetchQuote()
       setQuote(fetchedQuote)
     }
     getQuote()
@@ -23,6 +27,10 @@ export default function Home() {
       <p>Plan your movie nights with friends and family.</p>
       <p>Use the navigation bar to explore the app.</p>
       {quote && (
+        <div className='blockquote title1'>
+          {/* <blockquote>"{quote.quote}"</blockquote>
+          <p>- {quote.author}</p> */}
+          <blockquote >"{quote.joke}"</blockquote>
         <div>
           <blockquote>'{quote.quote}'</blockquote>
           <p>- {quote.author}</p>

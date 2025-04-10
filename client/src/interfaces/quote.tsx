@@ -1,4 +1,8 @@
+// export interface Quote {
+//     quote: string
+//     author: string
+// }
+
 export interface Quote {
-    quote: string
-    author: string
-}
+    joke: string | null;
+  }
