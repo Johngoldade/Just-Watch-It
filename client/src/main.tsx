@@ -11,6 +11,7 @@ import MovieDB from './pages/MovieDB.tsx'
 import Groups from './pages/Groups.tsx'
 import MyMovies from './pages/MyMovies.tsx'
 import ErrorPage from './pages/Error.tsx'
+import Login from './pages/Login.tsx'
 
 
 const router = createBrowserRouter([
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: '/Mymovies',
         element: <MyMovies />
+      },
+      {
+        path: '/login',
+        element: <Login />
       }
     ]
   }
