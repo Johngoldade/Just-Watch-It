@@ -17,7 +17,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-image: url('background.jpg');
+  background-image: url('../images/background4.jpg');
   background-size:cover;
   background-position:center;
   width: 100%;
