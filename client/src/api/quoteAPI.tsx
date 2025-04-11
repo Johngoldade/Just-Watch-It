@@ -10,9 +10,9 @@ export const fetchQuote = async (): Promise<Quote | null> => {
         if (!response.ok) {
             throw new Error('Invalid API response')
         }
-        const data: Quote = await response.json()
-        console.log(data)
-        return data
+        const data: Quote[] = await response.json()
+        console.log(data[0])
+        return data[0]
     } catch (error) {
         console.error(`Error retrieving data... see this error => ${error}`)
         return null

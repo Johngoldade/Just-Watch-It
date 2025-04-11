@@ -1,13 +1,9 @@
 import { useEffect, useState } from 'react'
 import { fetchQuote } from '../api/quoteAPI'
 
-// interface Quote {
-//   quote: string;
-//   author: string;
-// }
-
 interface Quote {
-  joke: string | null;
+  quote: string;
+  author: string;
 }
 
 export default function Home() {
@@ -28,30 +24,12 @@ export default function Home() {
       <p>Use the navigation bar to explore the app.</p>
       {quote && (
         <div className='blockquote title1'>
-          {/* <blockquote>"{quote.quote}"</blockquote>
-          <p>- {quote.author}</p> */}
-          <blockquote >"{quote.joke}"</blockquote>
-        {/* <div>
-          <blockquote>'{quote.quote}'</blockquote>
-          <p>- {quote.author}</p> */}
+          <blockquote>"{quote.quote}"</blockquote>
+          <p>- {quote.author}</p>
         </div>
       )}
     </div>
   )
 }
 
-// export default function HomePage() 
 
-
-//     return (
-//         <>
-//             <div>
-//                 <section id='quotes'></section>
-//                 <div className='d-flex justify-content-around'>
-//                     <article id='just-describe-it'></article>
-//                     <section id='group-pick'></section>
-//                 </div>
-//             </div>
-//         </>
-//     )
-// }

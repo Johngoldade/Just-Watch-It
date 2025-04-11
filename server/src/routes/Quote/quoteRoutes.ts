@@ -10,7 +10,7 @@ router.get('/', async (_req: Request, res: Response) => {
         if (!apiKey) {
             throw new Error('QUOTES_API_KEY is not defined');
         }
-        const response = await fetch('https://api.api-ninjas.com/v1/chucknorris', { headers: { 'X-Api-Key': apiKey } });
+        const response = await fetch('https://api.api-ninjas.com/v1/quotes', { headers: { 'X-Api-Key': apiKey } });
 
         if (response.ok) {
             const data = await response.json()
@@ -29,4 +29,3 @@ router.get('/', async (_req: Request, res: Response) => {
 export { router as QuoteRouter }
 
 
-// 'https://api.api-ninjas.com/v1/quotes'
