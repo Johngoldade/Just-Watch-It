@@ -12,12 +12,11 @@ class AuthService {
 
     login(idToken: string) {
         localStorage.setItem('id_token', idToken);
-        window.location.assign('/')
+        setInterval(() => window.location.assign('/'), 3000)
     }
 
     logout() {
         localStorage.removeItem('id_token');
-        window.location.assign('/')
     }
 }
 

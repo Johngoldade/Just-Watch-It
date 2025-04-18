@@ -67,7 +67,7 @@ const GroupPage: React.FC = () => {
           type='text'
           value={groupName}
           onChange={(e) => setGroupName(e.target.value)}
-          placeholder='Enter group name for movie night'
+          placeholder='Enter group name'
         />
         <input
           type='text'
@@ -75,7 +75,9 @@ const GroupPage: React.FC = () => {
           onChange={(e) => setNewUserName(e.target.value)}
           placeholder='Enter your name'
         />
-        <button onClick={createGroup}>Create Group</button>
+      </div>
+      <div>
+        <button className='btn btn-outline-light' onClick={createGroup}>Create Group</button>
       </div>
 
       {/* List of Groups */}

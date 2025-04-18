@@ -78,6 +78,15 @@ main {
   align-content: center;
 }
 
+.page-btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.page-btn {
+  width: 100px
+}
 input {
   margin: 10px
 }

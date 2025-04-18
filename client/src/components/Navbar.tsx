@@ -9,8 +9,8 @@ const Navbar = () => {
             </button>
 
             <div className='collapse navbar-collapse' id='navbarSupportedContent'>
-                <section className='top'>
-                    <ul className='navbar-nav'>
+                {/* <section className='top'> */}
+                    <ul className='navbar-nav navbar'>
                         <li className='nav-item px-2'>
                             <Link to='/' className={location === '/' ? 'title2' : 'title1'}>Home</Link>
                         </li>
@@ -27,7 +27,7 @@ const Navbar = () => {
                             <Link to='/Login'><button className='btn btn-outline-light'>Login</button></Link>
                         </li>
                     </ul>
-                </section >
+                {/* </section > */}
             </div>
         </nav >
     )
