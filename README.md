@@ -32,8 +32,6 @@ All users will need a login. To create a login when first using the website, cli
 
 Click the "Signup" button and enter a username, email, and password.
 
-*** NOTE! There are currently no prompts to inform you that the login was successfully created, so all you'll likely see is that the entry boxes go blank. This should indicate a successful signup. This also applies to all the other user interactions with the page. We apologize for the inconvenience and plan to update this in the future. ***
-
 Once you've completed the signup process, go back to the login page, enter your new username and password, and press "Login". If successful, this should redirect you the "Home" page. From here, go to the "Movie Database" page.
 
 ![Image of the movie database page with cards of movies.](./assets/movieDB.png)
