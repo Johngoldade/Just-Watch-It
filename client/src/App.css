@@ -81,3 +81,10 @@
 .nav-button.active {
   background-color: #28a745; /* Active button color */
 }
+
+.message {
+  background-color: #252323;
+  position: fixed;
+  top: 20px;
+  align-self: center;
+}

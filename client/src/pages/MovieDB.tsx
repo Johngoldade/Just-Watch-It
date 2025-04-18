@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Movie } from '../interfaces/movies'
 import { retrieveTMDBMovies, addFavoriteMovie } from '../api/moviesAPI'
 import SearchInput from '../components/Search'
+import Auth from '../utils/auth'
 
 export default function MovieDBBody() {
     const [movies, setMovies] = useState<Movie[]>([{
@@ -27,7 +28,20 @@ export default function MovieDBBody() {
         getMovies()
     }, [pageNumber])
 
-    const addMovie = (id: number, poster_path: string, title: string, overview: string, release_date: string) => addFavoriteMovie(id, poster_path, title, overview, release_date)
+    const addMovie = async (id: number, poster_path: string, title: string, overview: string, release_date: string) => {
+        const verify = Auth.getToken()
+        if (verify) {
+            const response = await addFavoriteMovie(id, poster_path, title, overview, release_date)
+            if (response) {
+                window.alert("Movie successfully saved!")
+            } else {
+                window.alert("Movie failed to save.")
+            }
+        } else {
+            window.alert("Please login to save movies.")
+        }
+        
+    }
 
     const filteredMovies = movies.filter((movie: Movie) =>
         movie.title.toLowerCase().includes(searchTerm.toLowerCase())

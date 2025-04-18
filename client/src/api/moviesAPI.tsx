@@ -75,6 +75,8 @@ const addFavoriteMovie = async (movieId: number, poster_path: string, title: str
         if (!response.ok) {
             throw new Error('Failed to add favorite movie');
         }
+
+        return response
     } catch (error) {
         console.error(`Movie was not added to your list for the following reason => ${error}`);
     }
