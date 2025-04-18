@@ -16,7 +16,7 @@ const Sidebar: React.FC = () => {
 
     useEffect(() => {
         const getMovies = async () => {
-            const tmdbMovies: Movie[] = await retrieveTMDBMovies();
+            const tmdbMovies: Movie[] = await retrieveTMDBMovies(1);
             setMovies(tmdbMovies);
             return;
         };
