@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { User } from '../interfaces/User'
 import { login } from '../api/authAPI'
-import { retrieveUsers } from '../api/userAPI'
+// import { retrieveUsers } from '../api/userAPI'
 import Auth from '../utils/auth'
 
 export default function Login() {
@@ -15,7 +15,17 @@ export default function Login() {
         primaryGroup: null,
     })
 
-    const [users, setUsers] = useState<User[]>([])
+    // const [users, setUsers] = useState<User[]>([])
+    const [ message, setMessage ] = useState<String>('')
+
+    
+
+        // Then, in any component (e.g., App.tsx), you can access the username like this:
+        
+
+        if (user && user.username) {
+            console.log('Logged in username:', user.username)
+        }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUser({ ...user, [e.target.name]: e.target.value })
@@ -24,22 +34,37 @@ export default function Login() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         try {
-            const response = await login(user)
-            if (response) {
-                Auth.login(response.token)
-                setUser({
-                    id: null,
-                    username: null,
-                    email: null,
-                    password: null,
-                    favorites: null,
-                    primaryGroup: null,
-                })
+            if (!user.username){
+                setMessage("Username is required to login!")
+                setTimeout(() => setMessage(''), 3000)
             }
-            
-            console.log('Login successful:', response)
+
+            if (!user.password){
+                setMessage("Password is required to login!")
+                setTimeout(() => setMessage(''), 3000)
+            }
+
+            if (user.username && user.password) {
+                const response = await login(user)
+                if (response) {
+                    Auth.login(response.token)
+                    setUser({
+                            id: null,
+                            username: null,
+                            email: null,
+                            password: null,
+                            favorites: null,
+                            primaryGroup: null,
+                        })
+                    setMessage("You have succesfully logged in!")
+                    setTimeout(() => setMessage(''), 3000)
+                }
+                console.log('Login successful:', response)
+            }
         } catch (error) {
             console.error('Login failed:', error)
+            setMessage("Your attempt to login failed. Please try again.")
+            setTimeout(() => setMessage(''), 3000)
         }
     }
 
@@ -47,24 +72,31 @@ export default function Login() {
         e.preventDefault()
         try {
             Auth.logout()
-            console.log('Logged out')
+            const verify = Auth.getToken()
+            if (!verify){
+                setMessage("You have successfully logged out!")
+                setTimeout(() => setMessage(''), 1500)
+                setInterval(() => window.location.assign('/'), 1500)
+            }
         } catch (error) {
             console.error('Login failed:', error)
+            setMessage("Log out failed.")
+            setTimeout(() => setMessage(''), 10000)
         }
     }
 
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const response = await retrieveUsers()
-                setUsers(response)
-            } catch (error) {
-                console.error('Error fetching users:', error)
-            }
-        }
-        fetchUsers()
-    }, [])
+    // useEffect(() => {
+    //     const fetchUsers = async () => {
+    //         try {
+    //             const response = await retrieveUsers()
+    //             setUsers(response)
+    //         } catch (error) {
+    //             console.error('Error fetching users:', error)
+    //         }
+    //     }
+    //     fetchUsers()
+    // }, [])
 
     return (
         <>
@@ -89,13 +121,15 @@ export default function Login() {
                 <button className='btn btn-outline-light' type='submit' onClick={handleSubmit}>Login</button>
                 <button className='btn btn-outline-light' onClick={handleLogout}>Log Out</button>
                 <button className='btn btn-outline-light'><Link to='/signup'>Signup</Link></button>
-                <h2>Existing Users</h2>
+                <h6>{message}</h6>
+                {/* <h2>Existing Users</h2>
                 <ul>
                     {users.map((u) => (
                         <li key={u.id}>{u.username}</li>
                     ))}
-                </ul>
+                </ul> */}
             </div>
         </>
     )
 }
+

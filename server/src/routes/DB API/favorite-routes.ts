@@ -44,7 +44,7 @@ router.get('/mymovies', async (req: Request, res: Response) => {
 
 // Add a favorite for a user
 router.post('/mymovies', async (req: Request, res: Response) => {
-    const { movieId } = req.body
+    const { movieId, poster_path, title, overview, release_date  } = req.body
 
     if (!movieId) {
         return res.status(400).json({ message: 'Movie ID is required.' })
@@ -75,7 +75,8 @@ router.post('/mymovies', async (req: Request, res: Response) => {
 
         const existingFavorite = await Favorite.findOne({
             where: {
-                id: movieId
+                id: movieId,
+                userId: userInfo.id
             }
         })
 
@@ -84,8 +85,12 @@ router.post('/mymovies', async (req: Request, res: Response) => {
         }
 
         const newFavorite = await Favorite.create({
-            id: movieId,
-            userId: userInfo.id
+            userId: userInfo.id,
+            movieId: movieId,
+            poster_path: poster_path,
+            title: title,
+            overview: overview,
+            release_date: release_date
         })
 
         return res.status(201).json(newFavorite)

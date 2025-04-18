@@ -4,10 +4,11 @@ import express from 'express'
 const router = express.Router()
 
 // GET request to fetch movies
-router.get('/', async (_req: Request, res: Response) => {
+router.get('/:page', async (req: Request, res: Response) => {
     try {
+        const page: number = parseInt(req.params.page)
         console.log(process.env.API_TOKEN)
-        const response = await fetch ('https://api.themoviedb.org/3/discover/movie?language=en-US&page=1&sort_by=popularity.desc',
+        const response = await fetch (`https://api.themoviedb.org/3/discover/movie?language=en-US&page=${page}&sort_by=popularity.desc`,
             {
                 headers: {
                     Authorization: `Bearer ${process.env.API_TOKEN}`

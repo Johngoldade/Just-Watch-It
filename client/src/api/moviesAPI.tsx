@@ -2,14 +2,13 @@ import Auth from '../utils/auth'
 import { Movie, TmdbReturn } from '../interfaces/movies'
 
 
-const retrieveTMDBMovies = async (): Promise<Movie[]> => {
+const retrieveTMDBMovies = async (page: number): Promise<Movie[]> => {
     try {
-        const response = await fetch('/tmdb/movies/',
+        const response = await fetch(`/tmdb/movies/${page}`,
             {
                 headers: {
                     'Content-Type': 'application/json',
-                    // Authorization: `Bearer ${Auth.getToken()}`
-                }
+                },
             })
 
         if (!response.ok) {
@@ -55,7 +54,7 @@ const retrieveMyMovies = async (): Promise<Movie[]> => {
     }
 }
 
-const addFavoriteMovie = async (movieId: number) => {
+const addFavoriteMovie = async (movieId: number, poster_path: string, title: string, overview: string, release_date: string ) => {
     try {
         const token = Auth.getToken();
         if (!token) {
@@ -70,7 +69,7 @@ const addFavoriteMovie = async (movieId: number) => {
                 'Content-Type': 'application/json',
                 authorization: `Bearer ${token}`
             },
-            body: JSON.stringify({ movieId })
+            body: JSON.stringify({ movieId, poster_path, title, overview, release_date })
         });
 
         if (!response.ok) {
