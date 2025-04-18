@@ -75,7 +75,7 @@ router.post('/mymovies', async (req: Request, res: Response) => {
 
         const existingFavorite = await Favorite.findOne({
             where: {
-                id: movieId,
+                movieId: movieId,
                 userId: userInfo.id
             }
         })
